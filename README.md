@@ -1,5 +1,5 @@
 # Gomoku
 A android gomoku game with AI.
 这是一个简单人工智能的五子棋游戏，可以人人对战、人机对战、wifi联网对战
-![image](https://github.com/lany192/FiveChess/raw/master/screenshot/a.png)
-![image](https://github.com/lany192/FiveChess/raw/master/screenshot/b.png)
+![image](https://github.com/lany192/gomoku/raw/master/screenshot/a.png)
+![image](https://github.com/lany192/gomoku/raw/master/screenshot/b.png)

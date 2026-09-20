@@ -78,7 +78,7 @@
     <string name="ai_algo_ant_colony">蚁群算法</string>
     <string name="ai_algo_simulated_annealing">模拟退火</string>
     <!-- 对话框与提示文案 -->
-    <string name="about_message">欢迎访问源代码\nhttps://github.com/lany192/FiveChess</string>
+    <string name="about_message">欢迎访问源代码\nhttps://github.com/lany192/gomoku</string>
     <string name="dialog_chat_title">对话</string>
     <string name="msg_black_win">黑方胜！</string>
     <string name="msg_white_win">白方胜！</string>
