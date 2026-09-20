@@ -9,8 +9,8 @@ import kotlin.random.Random
 /**
  * 学习类引擎的公共骨架：权重懒加载、脏标记、落库时机。
  *
- * 存储是阻塞的（Room 实现会做磁盘 IO），所有调用都发生在 [getPosition]/[onGameOver] 内部，
- * 由 ViewModel 保证在后台线程执行。
+ * 存储是阻塞的（Room 实现做磁盘 IO，DAO 的 suspend 由 runBlocking 桥回阻塞），
+ * 所有调用都发生在 [getPosition]/[onGameOver] 内部，由 ViewModel 保证在后台线程执行。
  */
 abstract class AbstractLearningEngine(
     width: Int,

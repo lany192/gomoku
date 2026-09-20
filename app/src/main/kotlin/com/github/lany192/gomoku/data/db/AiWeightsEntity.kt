@@ -1,7 +1,7 @@
 package com.github.lany192.gomoku.data.db
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 
 /** 学习类引擎的权重行：id 是算法枚举名（TD_LEARNING / Q_LEARNING / ALPHA_ZERO / GENETIC） */
 @Entity(tableName = "ai_weights")

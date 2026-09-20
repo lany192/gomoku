@@ -13,6 +13,7 @@ Android 五子棋应用，单 `app` 模块，100% Kotlin。手写 MVI（无 MVI 
 - Java 11 / `jvmTarget = 11`，compileSdk/targetSdk 36，minSdk 24。
 - AGP 9.x 内置 Kotlin 2.2 —— 不要在 plugins 里加 `org.jetbrains.kotlin.android`；Kotlin stdlib 会自动注入。
 - Room 用 KSP 生成代码：**KSP 必须用 2.3.x 的独立版本号**（如 `2.3.12`），2.2.x 的旧版本号会报 "Using kotlin.sourceSets DSL to add Kotlin sources is not allowed with built-in Kotlin"。
+- Room 是 3.x，坐标在 `androidx.room3`（`room3-runtime` / `room3-compiler`，原 `room-ktx` 已并入 runtime），包名 `androidx.room3`，KSP 生成的是 Kotlin 代码；**Room 3 的 DAO 方法必须为 suspend**，阻塞调用方用 `runBlocking` 桥接（见 `RoomAiWeightStore`）。
 - 测试：`./gradlew :app:testDebugUnitTest`（覆盖 `domain/engine`、`domain/ai` 与 `data/net/Protocol.kt` 有线协议的 JVM 测试）。
 
 ## 发布产物加固（仅 release）
