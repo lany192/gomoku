@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 难度 chip 底色：选中墨底，未选白底 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="@color/primary" />
+    <item android:color="@color/surface" />
+</selector>

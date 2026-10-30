@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 难度 chip 文字：选中反白 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="@color/on_primary" />
+    <item android:color="@color/secondary" />
+</selector>

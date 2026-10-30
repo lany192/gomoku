@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 墨绿主色（深色反转型） -->
-    <color name="primary">#9FCBB4</color>
-    <color name="on_primary">#0E3527</color>
-    <color name="primary_container">#26493B</color>
-    <color name="on_primary_container">#C8EAD8</color>
-    <!-- 暖棕辅色 -->
-    <color name="secondary">#D6B98C</color>
-    <color name="secondary_container">#54432A</color>
-    <!-- 中性表面 -->
-    <color name="background">#14120E</color>
-    <color name="on_background">#E7E1D6</color>
-    <color name="surface">#1B1914</color>
-    <color name="on_surface">#E7E1D6</color>
-    <color name="surface_variant">#454239</color>
-    <color name="on_surface_variant">#C9C2B3</color>
+    <!--
+      深色模式：宣纸反过来变成"墨底 + 宣纸字"。
+      注意主色在深色下要反相（primary 变浅、on_primary 变深），
+      否则主按钮会变成深底深字。
+    -->
+
+    <!-- ===== 墨 · 主色（深色下反相为浅字色） ===== -->
+    <color name="primary">#E9E3D6</color>
+    <color name="on_primary">#16130F</color>
+    <color name="primary_container">#2A2620</color>
+    <color name="on_primary_container">#EDE8DF</color>
+
+    <!-- ===== 墨次 · 辅色 ===== -->
+    <color name="secondary">#C9C2B4</color>
+    <color name="on_secondary">#1A1714</color>
+    <color name="secondary_container">#2E2922</color>
+    <color name="on_secondary_container">#EDE8DF</color>
+
+    <!-- ===== 朱砂（深色下提亮，保持可读） ===== -->
+    <color name="accent">#E4674C</color>
+    <color name="on_accent">#2A0F0A</color>
+    <color name="accent_container">#3A201B</color>
+    <color name="on_accent_container">#FFD9D0</color>
+
+    <!-- ===== 中性表面 ===== -->
+    <color name="background">#12100D</color>
+    <color name="on_background">#EDE8DF</color>
+    <color name="surface">#1A1714</color>
+    <color name="on_surface">#EDE8DF</color>
+    <color name="surface_variant">#34302A</color>
+    <color name="on_surface_variant">#A8A196</color>
     <!-- surfaceContainer 家族（Material 1.13 卡片/对话框默认取色，缺省会回退到浅色值） -->
-    <color name="surface_container_lowest">#0F0D0A</color>
-    <color name="surface_container_low">#1F1D16</color>
-    <color name="surface_container">#252118</color>
-    <color name="surface_container_high">#2F2A1F</color>
-    <color name="surface_container_highest">#3A3428</color>
-    <color name="outline">#948D7E</color>
-    <color name="outline_variant">#4A4436</color>
+    <color name="surface_container_lowest">#0D0B09</color>
+    <color name="surface_container_low">#1F1B17</color>
+    <color name="surface_container">#23201B</color>
+    <color name="surface_container_high">#2A2620</color>
+    <color name="surface_container_highest">#322D25</color>
+    <color name="outline">#8A8578</color>
+    <color name="outline_variant">#34302A</color>
     <color name="error">#F2B8B5</color>
+
+    <color name="icon_box">#26221C</color>
+
     <!-- 棋盘（深色下降明度，保持木质观感） -->
-    <color name="board_surface">#C99C63</color>
-    <color name="board_frame">#A67C45</color>
-    <color name="board_line">#3E2E1C</color>
+    <color name="board_surface">#D9BC8C</color>
+    <color name="board_frame">#A88049</color>
+    <color name="board_line">#4A3925</color>
+
     <!-- 棋子不随主题变化 -->
-    <color name="stone_black">#3C3F41</color>
-    <color name="stone_white">#F5F4F0</color>
-    <color name="stone_white_stroke">#4A4640</color>
-    <color name="win_mark">#FF6E5E</color>
+    <color name="stone_black">#23282B</color>
+    <color name="stone_white">#FBFAF7</color>
+    <color name="stone_white_stroke">#C4B9A4</color>
+    <color name="win_mark">#E4674C</color>
 </resources>

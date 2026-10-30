@@ -3,9 +3,29 @@
     <dimen name="boardWidth">1dp</dimen>
     <dimen name="anchorWidth">3dp</dimen>
     <dimen name="win_line_width">2.5dp</dimen>
+    <!-- 棋盘圆角：外层木框 20dp，内层棋盘面 = 20 - contentPadding -->
+    <dimen name="board_corner_radius">20dp</dimen>
+    <dimen name="board_inner_radius">14dp</dimen>
+    <dimen name="board_frame_padding">6dp</dimen>
+
     <!-- 间距令牌 -->
     <dimen name="spacing_xs">4dp</dimen>
     <dimen name="spacing_s">8dp</dimen>
     <dimen name="spacing_m">16dp</dimen>
     <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+
+    <!-- 圆角令牌 -->
+    <dimen name="radius_card">18dp</dimen>
+    <dimen name="radius_card_lg">20dp</dimen>
+    <dimen name="radius_button">15dp</dimen>
+    <dimen name="radius_chip">13dp</dimen>
+    <dimen name="radius_icon_box">13dp</dimen>
+
+    <!-- 控件尺寸 -->
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="icon_box_size">44dp</dimen>
+    <dimen name="stone_size">24dp</dimen>
+    <dimen name="nav_icon_size">40dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
 </resources>

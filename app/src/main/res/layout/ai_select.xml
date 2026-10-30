@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  对手设置：难度用一排等宽 chip（选中墨底反白），算法按家族分组的白卡列表。
+  列表用一张卡整体包住，家族标题留在卡内，视觉上是一块连续面板而不是一堆碎卡片。
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:padding="@dimen/spacing_m">
+    android:paddingStart="@dimen/spacing_l"
+    android:paddingEnd="@dimen/spacing_l">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@android:color/transparent"
-        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@drawable/bg_nav_back"
         app:title="@string/ai_select_title"
+        app:titleCentered="true"
         app:titleTextColor="?attr/colorOnSurface" />
 
     <TextView
@@ -20,66 +29,95 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_s"
         android:text="@string/difficulty"
-        android:textAppearance="?attr/textAppearanceTitleSmall"
-        android:textColor="?attr/colorOnSurfaceVariant" />
+        android:textAppearance="@style/TextAppearance.Gomoku.SectionLabel" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/difficulty_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xs"
+        android:layout_marginTop="10dp"
+        app:chipSpacingHorizontal="6dp"
         app:selectionRequired="true"
         app:singleLine="false"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/level_novice"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.Gomoku.Chip.Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ai_level_novice" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/level_easy"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.Gomoku.Chip.Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ai_level_easy" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/level_medium"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.Gomoku.Chip.Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ai_level_medium" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/level_hard"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.Gomoku.Chip.Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ai_level_hard" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/level_master"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/Widget.Gomoku.Chip.Level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ai_level_master" />
     </com.google.android.material.chip.ChipGroup>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_m"
-        android:text="@string/algorithm"
-        android:textAppearance="?attr/textAppearanceTitleSmall"
-        android:textColor="?attr/colorOnSurfaceVariant" />
+        android:layout_marginTop="@dimen/spacing_l"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/algorithm"
+            android:textAppearance="@style/TextAppearance.Gomoku.SectionLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/algo_count"
+            android:textColor="?attr/colorOutline"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/spacing_m"
+        android:layout_weight="1"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="?attr/colorOutlineVariant"
+        app:strokeWidth="1dp">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:scrollbars="none" />
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

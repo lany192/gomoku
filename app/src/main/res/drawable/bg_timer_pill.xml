@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 回合计时器：浅色胶囊，不抢棋盘的注意力 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/surface_container_high" />
+    <corners android:radius="10dp" />
+</shape>

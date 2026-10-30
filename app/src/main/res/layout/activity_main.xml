@@ -1,65 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  首页：品牌区 + 大标题 + 四个模式入口。
+  第一张卡是深墨实心（主推人机对战），其余白底描边 —— 用一张实心卡做视觉锚点，
+  避免四张卡长得一样、视线无处落。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_l">
+        android:paddingStart="@dimen/spacing_l"
+        android:paddingEnd="@dimen/spacing_l"
+        android:paddingTop="@dimen/spacing_s"
+        android:paddingBottom="@dimen/spacing_l">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:text="@string/app_name"
-            android:textAppearance="?attr/textAppearanceDisplaySmall"
-            android:textColor="?attr/colorPrimary" />
+        <!-- ===== 顶栏：品牌标记 + 关于 ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xs"
-            android:text="@string/app_subtitle"
-            android:textAppearance="?attr/textAppearanceBodyMedium"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            <FrameLayout
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_brand_mark">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_brand_mark" />
+            </FrameLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/conn_about"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_about_button"
+                android:contentDescription="@string/about"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_info"
+                app:tint="?attr/colorOnSurface" />
+        </LinearLayout>
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="34dp" />
 
+        <!-- ===== 标题区 ===== -->
+        <View
+            android:layout_width="26dp"
+            android:layout_height="3dp"
+            android:background="@drawable/bg_accent_rule" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:letterSpacing="0.16"
+            android:text="@string/home_eyebrow"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="11sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.02"
+            android:text="@string/app_name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_subtitle"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_xl" />
+
+        <!-- ===== 模式入口 ===== -->
+
+        <!-- 人机对战：主推，深墨实心 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/new_game"
-            style="?attr/materialCardViewElevatedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_height="88dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardBackgroundColor="?attr/colorPrimary"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="0dp"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/spacing_m">
+                android:paddingStart="@dimen/spacing_m"
+                android:paddingEnd="@dimen/spacing_m">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_mode_ai"
-                    app:tint="?attr/colorPrimary" />
+                <FrameLayout
+                    android:layout_width="@dimen/icon_box_size"
+                    android:layout_height="@dimen/icon_box_size"
+                    android:background="@drawable/bg_icon_box_on_dark">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_mode_ai"
+                        app:tint="?attr/colorOnPrimary" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -67,54 +149,70 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/new_game"
-                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardTitle"
+                        android:textColor="?attr/colorOnPrimary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:layout_marginTop="3dp"
+                        android:alpha="0.72"
                         android:text="@string/mode_desc_robot"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardDesc"
+                        android:textColor="?attr/colorOnPrimary" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:alpha="0.55"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right"
-                    app:tint="?attr/colorOutline" />
+                    app:tint="?attr/colorOnPrimary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- 两人对战 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fight"
-            style="?attr/materialCardViewElevatedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_height="88dp"
+            android:layout_marginTop="12dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="0dp"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/spacing_m">
+                android:paddingStart="@dimen/spacing_m"
+                android:paddingEnd="@dimen/spacing_m">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_mode_person"
-                    app:tint="?attr/colorPrimary" />
+                <FrameLayout
+                    android:layout_width="@dimen/icon_box_size"
+                    android:layout_height="@dimen/icon_box_size"
+                    android:background="@drawable/bg_icon_box">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_mode_person"
+                        app:tint="?attr/colorOnSurface" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -122,54 +220,66 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/fight"
-                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardTitle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:layout_marginTop="3dp"
                         android:text="@string/mode_desc_person"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardDesc" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right"
                     app:tint="?attr/colorOutline" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- 联网对战 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/conn_fight"
-            style="?attr/materialCardViewElevatedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_height="88dp"
+            android:layout_marginTop="12dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="0dp"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/spacing_m">
+                android:paddingStart="@dimen/spacing_m"
+                android:paddingEnd="@dimen/spacing_m">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_mode_lan"
-                    app:tint="?attr/colorPrimary" />
+                <FrameLayout
+                    android:layout_width="@dimen/icon_box_size"
+                    android:layout_height="@dimen/icon_box_size"
+                    android:background="@drawable/bg_icon_box">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_mode_lan"
+                        app:tint="?attr/colorOnSurface" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -177,54 +287,66 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/fight_connection"
-                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardTitle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:layout_marginTop="3dp"
                         android:text="@string/mode_desc_lan"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardDesc" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right"
                     app:tint="?attr/colorOutline" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- 蓝牙对战 -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/bt_fight"
-            style="?attr/materialCardViewElevatedStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_height="88dp"
+            android:layout_marginTop="12dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="0dp"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/spacing_m">
+                android:paddingStart="@dimen/spacing_m"
+                android:paddingEnd="@dimen/spacing_m">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_mode_bt"
-                    app:tint="?attr/colorPrimary" />
+                <FrameLayout
+                    android:layout_width="@dimen/icon_box_size"
+                    android:layout_height="@dimen/icon_box_size"
+                    android:background="@drawable/bg_icon_box">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_mode_bt"
+                        app:tint="?attr/colorOnSurface" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -232,37 +354,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/fight_bluetooth"
-                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardTitle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:layout_marginTop="3dp"
                         android:text="@string/mode_desc_bt"
-                        android:textAppearance="?attr/textAppearanceBodySmall"
-                        android:textColor="?attr/colorOnSurfaceVariant" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.CardDesc" />
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right"
                     app:tint="?attr/colorOutline" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/conn_about"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/spacing_s"
-        android:layout_marginEnd="@dimen/spacing_s"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/about"
-        android:scaleType="center"
-        android:src="@drawable/ic_info"
-        app:tint="?attr/colorOnSurfaceVariant" />
-</FrameLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l"
+            android:gravity="center"
+            android:letterSpacing="0.06"
+            android:text="@string/home_footer"
+            android:textColor="?attr/colorOutline"
+            android:textSize="11sp" />
+    </LinearLayout>
+</ScrollView>

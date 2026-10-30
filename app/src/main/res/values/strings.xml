@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">五子棋</string>
-    <string name="app_subtitle">原木棋盘 · 墨绿对弈</string>
+    <string name="app_subtitle">静下心，认真下一盘棋</string>
+    <string name="home_eyebrow">GOMOKU · 十五路棋盘</string>
+    <string name="home_footer">本地 · 人机 · 局域网 · 蓝牙</string>
     <string name="mode_desc_robot">25 种算法 × 5 档难度</string>
-    <string name="mode_desc_person">同屏轮流落子</string>
-    <string name="mode_desc_lan">连接同一 WiFi 的玩家</string>
-    <string name="mode_desc_bt">连接附近的蓝牙设备玩家</string>
+    <string name="mode_desc_person">同一块屏幕，轮流落子</string>
+    <string name="mode_desc_lan">同一 WiFi 下的玩家</string>
+    <string name="mode_desc_bt">附近已配对的设备</string>
     <string name="scan">局域网联机扫描</string>
     <string name="bt_scan">蓝牙联机扫描</string>
     <string name="bt_scan_hint">搜索已配对或附近的蓝牙设备</string>
@@ -24,7 +26,7 @@
     <string name="connections">联机</string>
     <string name="black">黑方</string>
     <string name="white">白方</string>
-    <string name="restart">新开</string>
+    <string name="restart">新开一局</string>
     <string name="rollback">悔棋</string>
     <string name="about">关于</string>
     <string name="equal">求和</string>
@@ -36,6 +38,11 @@
     <string name="cancel">取消</string>
     <string name="scan_hint">搜索连接同一 WiFi 的玩家</string>
     <string name="game_player">玩家</string>
+    <string name="peers_nearby">附近玩家</string>
+    <string name="invite">邀请</string>
+    <string name="scanning_hint">请确保双方连接同一 WiFi</string>
+    <string name="scan_empty">还没有搜到附近玩家，保持本页开启稍等片刻</string>
+    <string name="score_colon">:</string>
     <string name="ai_level_novice">入门</string>
     <string name="ai_level_easy">简单</string>
     <string name="ai_level_medium">中等</string>
@@ -44,6 +51,7 @@
     <!-- 对手设置（算法 + 难度） -->
     <string name="ai_select_title">对手设置</string>
     <string name="algorithm">算法</string>
+    <string name="algo_count">共 25 种</string>
     <string name="difficulty">难度</string>
     <string name="algorithm_difficulty_format">算法：%1$s · 难度：%2$s</string>
     <string name="ai_family_search">搜索类</string>

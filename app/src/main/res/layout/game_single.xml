@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  人机对局：记分卡 → 棋盘 → 对手设置 → 终局横幅 → 主次按钮。
+  棋盘是整屏唯一有材质的东西（木色 + 圆角），其余全部让位。
+  布局顺序固定：横幅插在棋盘之后，终局时按钮下移，棋盘不跳。
+-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_m">
+        android:paddingStart="@dimen/spacing_l"
+        android:paddingEnd="@dimen/spacing_l"
+        android:paddingBottom="@dimen/spacing_l">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/toolbar_height"
             android:background="@android:color/transparent"
-            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:navigationIcon="@drawable/bg_nav_back"
             app:title="@string/new_game"
+            app:titleCentered="true"
             app:titleTextColor="?attr/colorOnSurface" />
 
-        <!-- 记分卡 -->
+        <!-- ===== 记分卡 ===== -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_s"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="@dimen/radius_card"
             app:cardElevation="0dp"
             app:strokeColor="?attr/colorOutlineVariant"
             app:strokeWidth="1dp">
@@ -35,19 +49,23 @@
                 android:baselineAligned="false"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/spacing_m">
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:paddingTop="@dimen/spacing_m"
+                android:paddingBottom="@dimen/spacing_m">
 
+                <!-- 左：自己（执黑先手） -->
                 <LinearLayout
                     android:id="@+id/black_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/stone_size"
+                        android:layout_height="@dimen/stone_size"
                         android:importantForAccessibility="no"
                         android:src="@drawable/black_chess" />
 
@@ -59,6 +77,7 @@
                         android:text="@string/myself"
                         android:textAppearance="?attr/textAppearanceTitleSmall" />
 
+                    <!-- 朱砂点 = 轮到他落子 -->
                     <ImageView
                         android:id="@+id/black_active"
                         android:layout_width="8dp"
@@ -73,22 +92,26 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.Score"
+                        tools:text="0" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing_s"
-                    android:text=":"
-                    android:textColor="?attr/colorOnSurfaceVariant" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/score_colon"
+                    android:textColor="?attr/colorOutline"
+                    android:textSize="18sp" />
 
+                <!-- 右：电脑（执白） -->
                 <LinearLayout
                     android:id="@+id/white_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
@@ -97,7 +120,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+                        android:textAppearance="@style/TextAppearance.Gomoku.Score"
+                        tools:text="0" />
 
                     <ImageView
                         android:id="@+id/white_active"
@@ -117,82 +141,26 @@
 
                     <ImageView
                         android:id="@+id/white_chess"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="@dimen/stone_size"
+                        android:layout_height="@dimen/stone_size"
                         android:importantForAccessibility="no"
                         android:src="@drawable/white_chess" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 对手设置入口：算法 · 难度，点击进独立选择页 -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/opponent_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardElevation="0dp"
-            app:strokeColor="?attr/colorOutlineVariant"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:minHeight="48dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/spacing_m">
-
-                <TextView
-                    android:id="@+id/opponent_summary"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    tools:text="算法：棋型评分（经典） · 难度：中等" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_chevron_right"
-                    app:tint="?attr/colorOnSurfaceVariant" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 终局结果横幅 -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/result_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:visibility="gone"
-            app:cardBackgroundColor="?attr/colorPrimaryContainer"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/result_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/spacing_m"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textColor="?attr/colorOnPrimaryContainer" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 棋盘框：SurfaceView 为独立层圆角裁不到，故用直角木框 -->
+        <!-- ===== 棋盘 =====
+             木框留 6dp，圆角由 GameBoardView 自己按 board_inner_radius 裁，
+             SurfaceView 在独立层，卡片的圆角裁不到它。 -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_m"
             app:cardBackgroundColor="@color/board_frame"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="2dp"
-            app:contentPadding="10dp">
+            app:cardCornerRadius="@dimen/board_corner_radius"
+            app:cardElevation="0dp"
+            app:contentPadding="@dimen/board_frame_padding"
+            app:strokeWidth="0dp">
 
             <com.github.lany192.gomoku.ui.common.GameBoardView
                 android:id="@+id/game_view"
@@ -200,6 +168,101 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- ===== 对手设置入口 ===== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/opponent_settings"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="@dimen/radius_card"
+            app:cardElevation="0dp"
+            app:rippleColor="?attr/colorControlHighlight"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <FrameLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_icon_box">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_tune" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ai_select_title"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/opponent_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp"
+                        tools:text="算法：Alpha-Beta 剪枝 · 难度：困难" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="?attr/colorOutline" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===== 终局横幅 ===== -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/result_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/accent_container"
+            app:cardCornerRadius="@dimen/radius_button"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <TextView
+                android:id="@+id/result_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/spacing_m"
+                android:textColor="@color/on_accent_container"
+                android:textSize="15sp"
+                tools:text="黑方胜！" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ===== 操作：一屏只留一个主按钮 ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -207,22 +270,20 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/restart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/restart" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/rollback"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_s"
-                android:layout_weight="1"
+                style="@style/Widget.Gomoku.Button.Ghost"
+                android:layout_width="104dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="10dp"
                 android:text="@string/rollback" />
 
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restart"
+                style="@style/Widget.Gomoku.Button.Primary"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_weight="1"
+                android:text="@string/restart" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

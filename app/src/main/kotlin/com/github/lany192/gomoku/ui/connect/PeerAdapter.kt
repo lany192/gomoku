@@ -18,9 +18,13 @@ class PeerAdapter(
 
     private var items: List<ConnectionItem> = emptyList()
 
+    /** 列表空/非空的回调：联机页用它切换"还没搜到玩家"的占位文案 */
+    private var onEmptyChanged: ((Boolean) -> Unit)? = null
+
     fun submit(data: List<ConnectionItem>) {
         items = data
         notifyDataSetChanged()
+        onEmptyChanged?.invoke(items.isEmpty())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,4 +48,15 @@ class PeerAdapter(
     }
 
     class ViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    /**
+     * 把列表的"空/非空"接到一个占位 View 上。
+     * 联机页在还没搜到设备时如果只剩一片空白，页面上就完全没有可读信息了。
+     */
+    fun bindEmptyView(emptyView: View) {
+        onEmptyChanged = { empty ->
+            emptyView.visibility = if (empty) View.VISIBLE else View.GONE
+        }
+        emptyView.visibility = if (itemCount == 0) View.VISIBLE else View.GONE
+    }
 }

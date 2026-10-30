@@ -1,7 +1,85 @@
 <resources>
+    <!--
+      组件样式：这套设计只区分三种按钮 —— 实心主按钮、描边次按钮、危险描边。
+      圆角统一 15dp，最小高度 52dp，保证拇指可点。
+    -->
+
+    <!-- 实心主按钮：墨底白字，一屏只出现一个 -->
+    <style name="Widget.Gomoku.Button.Primary" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/radius_button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Gomoku.Button</item>
+    </style>
+
+    <!-- 描边次按钮 -->
+    <style name="Widget.Gomoku.Button.Ghost" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">@dimen/radius_button</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Gomoku.Button</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+    </style>
+
     <!-- 危险操作（认输）轮廓按钮 -->
-    <style name="Widget.Gomoku.Button.DangerOutlined" parent="Widget.Material3.Button.OutlinedButton">
+    <style name="Widget.Gomoku.Button.DangerOutlined" parent="Widget.Gomoku.Button.Ghost">
         <item name="android:textColor">?attr/colorError</item>
         <item name="strokeColor">?attr/colorError</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+    </style>
+
+    <!-- 难度 chip：未选白底描边，选中墨底白字（MaterialButton/Chip 的选中态走 ColorStateList） -->
+    <style name="Widget.Gomoku.Chip.Level" parent="Widget.Material3.Chip.Filter">
+        <item name="chipMinHeight">38dp</item>
+        <item name="chipCornerRadius">@dimen/radius_chip</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/chip_level_stroke</item>
+        <item name="chipBackgroundColor">@color/chip_level_bg</item>
+        <item name="android:textColor">@color/chip_level_text</item>
+        <item name="android:textSize">13sp</item>
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:checkable">true</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="chipStartPadding">8dp</item>
+        <item name="chipEndPadding">8dp</item>
+    </style>
+
+    <!-- ===== 文字样式 ===== -->
+
+    <!-- 比分数字：比正文重一档，数字等宽感更好 -->
+    <style name="TextAppearance.Gomoku.Score" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.Gomoku.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- 分组小标（难度 / 算法 / 附近玩家）：小字号 + 拉开字距 -->
+    <style name="TextAppearance.Gomoku.SectionLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- 卡片标题 -->
+    <style name="TextAppearance.Gomoku.CardTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <!-- 卡片说明 -->
+    <style name="TextAppearance.Gomoku.CardDesc" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
     </style>
 </resources>

@@ -939,3 +939,73 @@ Toolbar「两人对战」→ 记分卡（黑方 / 白方 + 胜场）→ 倒计�
 | D19 | **对手设置页旋转后丢失页内已改的选择** | ⏳ 待修 | 选择态放在 Activity 普通字段，无 ViewModel/`SavedStateHandle` 承载（难度由 ChipGroup 自身状态回填，算法不会）。修法：选择态入 `SavedStateHandle` |
 | D20 | **局域网建连单次 `connect` 未设超时** | ⏳ 待修 | 代码常量是 10 次 × 250ms（与 FR-LAN-21 一致），但 `Socket().connect(addr)` 无超时，单次失败可能阻塞远超 250ms，"10×250ms"上限不成立、等待框可能长时间不消失。修法：`connect(addr, 250)`；另 `LanGameClient` 有一处注释误写为"8 次 × 200ms" |
 | D21 | **测试覆盖缺口** | ⏳ 待补 | ① `ProtocolTest` 对 `RESTART`/`CONNECTED` 只有枚举断言，缺字节级 golden 帧断言（§15.3-12 的要求）；② `ConnectViewModel` 的握手/互戳仲裁/忙则拒绝/EXIT 处理零覆盖（D5 正因此未被发现）；③ 六连高亮 6 点、悔棋不回退比分、非法点击无反馈缺回归用例 |
+
+---
+
+## 17. 视觉规范（2026-10 改版）
+
+> **设计目标**：宣纸白 + 墨色 + 朱砂单点强调，木材质只留给棋盘。
+> 全页面极简，唯一有纹理的元素是棋盘本身 —— 层次靠描边与留白建立，不靠阴影。
+> 落地位置：`res/values/colors.xml`、`res/values-night/colors.xml`、`res/values/styles.xml`、`res/values/dimens.xml`、`res/layout/*.xml`。
+
+### 17.1 色彩令牌
+
+| 令牌 | 浅色 | 深色 | 用途 |
+|---|---|---|---|
+| `primary` | `#16211D` | `#E9E3D6` | 墨。主按钮底色、标题、实心主推卡 |
+| `on_primary` | `#FFFFFF` | `#16130F` | 墨底上的文字与图标 |
+| `surface` | `#FFFFFF` | `#1A1714` | 卡面 |
+| `background` | `#F7F6F2` | `#12100D` | 宣纸底 |
+| `on_surface` | `#16211D` | `#EDE8DF` | 主文字 |
+| `on_surface_variant` | `#7C857F` | `#A8A196` | 弱文字（说明、分组小标） |
+| `outline` | `#A6AFA9` | `#8A8578` | 箭头、页脚等极弱元素 |
+| `outline_variant` | `#EDEAE2` | `#34302A` | 卡片描边、分割线 |
+| `accent` | `#C0462F` | `#E4674C` | **朱砂**，唯一强调色 |
+| `accent_container` | `#FBEDE9` | `#3A201B` | 终局横幅底色 |
+| `icon_box` | `#F5F3EC` | `#26221C` | 卡片内图标底板 |
+| `board_surface` | `#E8CD9F` | `#D9BC8C` | 棋盘面 |
+| `board_frame` | `#C9A164` | `#A88049` | 棋盘木框 |
+| `board_line` | `#8E6C40` | `#4A3925` | 棋盘线 |
+
+**朱砂使用边界（强制）**：当前回合点（`active_dot`）、最后一手标记（`black_chess_new` / `white_chess_new` / `focus_ring`）、算法选中勾、主链接。**不得用于大面积背景或整屏主色** —— 铺开了强调就不成立。
+
+### 17.2 字体
+
+- 中文 `Noto Sans SC`；数字（比分、IP、MAC）走 `Inter` / `sans-serif-medium`，避免中文字体的 `0` 过窄难辨。
+- 字号阶梯：标题 44sp Bold / 页标题 17sp SemiBold / 卡片标题 16sp Medium / 按钮 15sp Medium / 正文 14sp / 卡片说明 12sp / 辅助 11sp。
+- 分组小标（难度、算法、附近玩家）用 12sp + `letterSpacing 0.12`：让它作为「分组」而不是「标题」被读出来。
+
+### 17.3 圆角与尺寸
+
+| 令牌 | 值 | 用途 |
+|---|---|---|
+| `radius_card` | 18dp | 普通卡片 |
+| `radius_card_lg` | 20dp | 扫描面板、棋盘外框 |
+| `radius_button` | 15dp | 所有按钮 |
+| `radius_chip` | 13dp | 难度 chip |
+| `radius_icon_box` | 13dp | 卡片内 44dp 图标底板 |
+| `board_inner_radius` | 14dp | 棋盘面（= 外框 20 − 木框 6） |
+| `button_height` | 52dp | 所有主次按钮的最小高度 |
+
+### 17.4 页面结构
+
+- **首页**：品牌标记 + 关于 → 朱砂短横线 + 英文小标 + 44sp 标题 + 副标 → 四张模式卡 → 页脚。
+  第一张「人机对战」是**深墨实心卡**作为视觉锚点，其余三张白底 1dp 描边。四张卡完全同形是上一版最主要的问题（重心全掉在屏幕底部、上面一片空白）。
+- **对局页（人机 / 两人 / 联机共用骨架）**：工具栏（圆形返回 + 居中标题）→ 记分卡 → （联机：回合计时胶囊）→ 棋盘 → 对手设置（仅人机）/ 终局横幅 → 主次按钮。
+  **一屏只保留一个实心主按钮**（新开一局），悔棋 / 求和 / 认输一律描边。终局横幅插在棋盘之后，出现时只有按钮下移，棋盘不跳。
+- **对手设置**：一排难度 chip（选中墨底反白）+ 一张白卡包住按家族分组的算法列表；选中项 = 朱砂勾 + 加粗 + 主文字色（只换颜色区分度不够）。
+- **联机大厅**：本机身份（仅蓝牙，默认 GONE）→ 扫描面板（提示文案 + 主按钮收进同一张卡，读起来像一件事）→ 附近玩家列表（整行可点，右侧「邀请」只是把动作显性化）。
+
+### 17.5 棋盘渲染
+
+`GameBoardView` 自绘时按 `board_inner_radius` 裁圆角：SurfaceView 独立成层，外层卡片的圆角**裁不到**它，只能自己裁。圆角外清成透明，露出卡片木框色 —— 于是「木框 + 圆角棋盘面」由两层各自负责，互不干扰。
+
+状态栏 / 系统栏区域由 `setupEdgeToEdge` 叠加 insets，布局内**不写死**状态栏高度。
+
+### 17.6 深浅主题
+
+深色不是简单反色：`primary` 与 `on_primary` 必须互换明度，否则主按钮会变成「深底深字」。棋盘木色在深色下降一档明度以保持木质观感。
+
+### 17.7 兼容性约束
+
+布局里禁止使用 API 26+ 的 `paddingHorizontal` / `paddingVertical` / `layout_marginHorizontal`（minSdk 24，低版本会静默失效），一律写 `paddingStart/End`、`paddingTop/Bottom`、`layout_marginStart/End`。

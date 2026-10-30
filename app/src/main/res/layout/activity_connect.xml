@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  联机大厅：本机身份（仅蓝牙）→ 扫描面板 → 设备列表。
+  扫描面板把"提示 + 主按钮"收进一张卡，让它读起来像一件事，
+  而不是一段孤立文字加一个按钮。
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:padding="@dimen/spacing_m">
+    android:paddingStart="@dimen/spacing_l"
+    android:paddingEnd="@dimen/spacing_l">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@android:color/transparent"
-        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@drawable/bg_nav_back"
         app:title="@string/connections"
+        app:titleCentered="true"
         app:titleTextColor="?attr/colorOnSurface" />
 
     <!-- 蓝牙联机页用来显示本机身份；局域网页不设置，保持 GONE -->
@@ -22,33 +32,87 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_s"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorPrimary"
+        android:background="@drawable/bg_self_info"
+        android:paddingStart="@dimen/spacing_m"
+        android:paddingEnd="@dimen/spacing_m"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:textColor="?attr/colorOnSurface"
         android:textIsSelectable="true"
+        android:textSize="13sp"
         android:visibility="gone"
         tools:text="本机：HUAWEI Mate 50（90:F0:52:B0:AB:6A）"
         tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/hint"
+    <!-- 扫描面板 -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_s"
-        android:text="@string/scan_hint"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant" />
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="@dimen/radius_card_lg"
+        app:cardElevation="0dp"
+        app:strokeColor="?attr/colorOutlineVariant"
+        app:strokeWidth="1dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/scan"
-        android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/scan_hint"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/scan"
+                style="@style/Widget.Gomoku.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="14dp"
+                android:text="@string/scan" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/spacing_s"
-        android:text="@string/scan" />
+        android:layout_marginTop="@dimen/spacing_l"
+        android:text="@string/peers_nearby"
+        android:textAppearance="@style/TextAppearance.Gomoku.SectionLabel" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+    <!-- 列表 + 空态占位：空态由 PeerAdapter.bindEmptyView 控制显隐 -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="10dp"
+        android:layout_weight="1">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/spacing_m"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@string/scan_empty"
+            android:textColor="?attr/colorOutline"
+            android:textSize="12sp" />
+    </FrameLayout>
 </LinearLayout>

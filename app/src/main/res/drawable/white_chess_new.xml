@@ -11,7 +11,8 @@
         android:strokeColor="@color/stone_white_stroke"
         android:strokeWidth="40" />
 
+    <!-- 最后一手标记：朱砂，与记分卡的回合点同色 -->
     <path
-        android:fillColor="@color/stone_white_stroke"
+        android:fillColor="@color/accent"
         android:pathData="M427 483.328a85 85 0 1 0 170 0a85 85 0 1 0-170 0Z" />
 </vector>

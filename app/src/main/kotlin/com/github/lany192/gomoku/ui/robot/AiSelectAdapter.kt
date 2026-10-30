@@ -1,5 +1,6 @@
 package com.github.lany192.gomoku.ui.robot
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,9 +65,14 @@ class AiSelectAdapter(
         binding.algorithmName.setText(algorithmNameRes(algorithm))
         val chosen = algorithm == selected
         binding.algorithmCheck.visibility = if (chosen) View.VISIBLE else View.INVISIBLE
+        // 选中：主文字色 + 加粗；未选中：弱文字色。只靠颜色区分不够，字重也要跟着变
         binding.algorithmName.setTextColor(
-            MaterialColors.getColor(binding.algorithmName, if (chosen) PRIMARY_ATTR else ON_SURFACE_ATTR)
+            MaterialColors.getColor(
+                binding.algorithmName,
+                if (chosen) ON_SURFACE_ATTR else ON_SURFACE_VARIANT_ATTR,
+            )
         )
+        binding.algorithmName.setTypeface(null, if (chosen) Typeface.BOLD else Typeface.NORMAL)
         binding.root.setOnClickListener {
             if (algorithm != selected) {
                 select(algorithm)
@@ -87,7 +93,7 @@ class AiSelectAdapter(
     private companion object {
         const val TYPE_FAMILY = 0
         const val TYPE_ALGORITHM = 1
-        val PRIMARY_ATTR = androidx.appcompat.R.attr.colorPrimary
         val ON_SURFACE_ATTR = com.google.android.material.R.attr.colorOnSurface
+        val ON_SURFACE_VARIANT_ATTR = com.google.android.material.R.attr.colorOnSurfaceVariant
     }
 }

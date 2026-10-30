@@ -58,6 +58,7 @@ class ConnectionActivity : AppCompatActivity() {
         }
         binding.list.layoutManager = LinearLayoutManager(this)
         binding.list.adapter = peerAdapter
+        peerAdapter.bindEmptyView(binding.listEmpty)
         observeViewModel()
     }
 

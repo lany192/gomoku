@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 墨绿主色 -->
-    <color name="primary">#2F5D4C</color>
+    <!--
+      视觉改版：宣纸白底 + 墨色文字 + 朱砂单点强调，木材质只留给棋盘。
+      强调色只用于：当前回合、最后一手、选中勾选、主链接 —— 不铺大面积。
+    -->
+
+    <!-- ===== 墨 · 主色 ===== -->
+    <color name="primary">#16211D</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#CFE6DA</color>
-    <color name="on_primary_container">#10261E</color>
-    <!-- 暖棕辅色 -->
-    <color name="secondary">#8A6B45</color>
-    <color name="secondary_container">#F0DFC8</color>
-    <!-- 中性表面 -->
-    <color name="background">#F7F4EC</color>
-    <color name="on_background">#1C1B17</color>
-    <color name="surface">#FDFAF3</color>
-    <color name="on_surface">#1C1B17</color>
-    <color name="surface_variant">#E8E3D7</color>
-    <color name="on_surface_variant">#4A463D</color>
+    <color name="primary_container">#EBE8E0</color>
+    <color name="on_primary_container">#16211D</color>
+
+    <!-- ===== 墨次 · 辅色 ===== -->
+    <color name="secondary">#3F4A45</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#EDEAE2</color>
+    <color name="on_secondary_container">#16211D</color>
+
+    <!-- ===== 朱砂 · 唯一强调色 ===== -->
+    <color name="accent">#C0462F</color>
+    <color name="on_accent">#FFFFFF</color>
+    <color name="accent_container">#FBEDE9</color>
+    <color name="on_accent_container">#7A2A1C</color>
+
+    <!-- ===== 宣纸底 · 中性表面 ===== -->
+    <color name="background">#F7F6F2</color>
+    <color name="on_background">#16211D</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#16211D</color>
+    <color name="surface_variant">#EDEAE2</color>
+    <color name="on_surface_variant">#7C857F</color>
     <!-- surfaceContainer 家族（Material 1.13 卡片/对话框默认取色，缺省会落到紫色系） -->
-    <color name="surface_container_lowest">#FFFEFA</color>
-    <color name="surface_container_low">#FAF7EF</color>
-    <color name="surface_container">#F4F0E5</color>
-    <color name="surface_container_high">#EEEBDF</color>
-    <color name="surface_container_highest">#E8E4D8</color>
-    <color name="outline">#7B7568</color>
-    <color name="outline_variant">#D2CBBA</color>
-    <color name="error">#BA1A1A</color>
-    <!-- 棋盘 -->
-    <color name="board_surface">#E6C48C</color>
-    <color name="board_frame">#C89E60</color>
-    <color name="board_line">#6B4E2E</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
+    <color name="surface_container_low">#FBFAF7</color>
+    <color name="surface_container">#F7F6F2</color>
+    <color name="surface_container_high">#F2F0EA</color>
+    <color name="surface_container_highest">#EDEAE2</color>
+    <color name="outline">#A6AFA9</color>
+    <color name="outline_variant">#EDEAE2</color>
+    <color name="error">#B3261E</color>
+
+    <!-- 图标底板：卡片里承载 24dp 线稿图标的浅色方块 -->
+    <color name="icon_box">#F5F3EC</color>
+
+    <!-- ===== 棋盘（全界面唯一保留材质的地方） ===== -->
+    <color name="board_surface">#E8CD9F</color>
+    <color name="board_frame">#C9A164</color>
+    <color name="board_line">#8E6C40</color>
+
     <!-- 棋子（物理物件，深浅主题同值） -->
-    <color name="stone_black">#3C3F41</color>
-    <color name="stone_white">#F5F4F0</color>
-    <color name="stone_white_stroke">#4A4640</color>
-    <color name="win_mark">#D54533</color>
+    <color name="stone_black">#23282B</color>
+    <color name="stone_white">#FBFAF7</color>
+    <color name="stone_white_stroke">#C4B9A4</color>
+    <color name="win_mark">#C0462F</color>
 </resources>

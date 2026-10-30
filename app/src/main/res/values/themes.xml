@@ -6,7 +6,9 @@
         <item name="colorPrimaryContainer">@color/primary_container</item>
         <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
         <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
         <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/on_surface</item>
         <item name="colorSurfaceVariant">@color/surface_variant</item>
@@ -20,7 +22,9 @@
         <item name="colorOutlineVariant">@color/outline_variant</item>
         <item name="colorOnBackground">@color/on_background</item>
         <item name="colorError">@color/error</item>
+        <!-- 朱砂强调色：布局里直接用 @color/accent，不走 Material 角色 -->
         <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
         <!-- 仅 API≤34 生效；35+ 由系统强制透明，enableEdgeToEdge 负责图标色 -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>

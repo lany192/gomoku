@@ -3,8 +3,12 @@ package com.github.lany192.gomoku.ui.common
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.PixelFormat
+import android.graphics.PorterDuff
+import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.os.Looper
 import android.util.AttributeSet
@@ -38,6 +42,11 @@ class GameBoardView @JvmOverloads constructor(
         style = Paint.Style.STROKE
     }
     private val boardBgColor = ContextCompat.getColor(context, R.color.board_surface)
+
+    /** 棋盘面圆角：SurfaceView 独立成层，外层卡片的圆角裁不到它，只能自绘时裁 */
+    private val boardRadius = resources.getDimension(R.dimen.board_inner_radius)
+    private val boardRect = RectF()
+    private val boardClip = Path()
 
     private var boardWidth = DEFAULT_BOARD_SIZE
     private var boardHeight = DEFAULT_BOARD_SIZE
@@ -139,6 +148,17 @@ class GameBoardView @JvmOverloads constructor(
             null
         } ?: return
         try {
+            val width = width.toFloat()
+            val height = height.toFloat()
+            if (width <= 0f || height <= 0f) return
+            // 先清成透明再按圆角裁剪：圆角外露出的是卡片木框色，
+            // 于是"木框 + 圆角棋盘面"由两层各自负责，互不干扰。
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+            boardRect.set(0f, 0f, width, height)
+            boardClip.reset()
+            boardClip.addRoundRect(boardRect, boardRadius, boardRadius, Path.Direction.CW)
+            val saved = canvas.save()
+            canvas.clipPath(boardClip)
             canvas.drawColor(boardBgColor)
             drawBoard(canvas)
             val state = renderState
@@ -147,6 +167,7 @@ class GameBoardView @JvmOverloads constructor(
                 drawWinLine(canvas, state)
             }
             drawFocus(canvas)
+            canvas.restoreToCount(saved)
         } finally {
             try {
                 holder.unlockCanvasAndPost(canvas)
